@@ -224,5 +224,5 @@ Para sugerir melhorias nos prompts:
 ---
 
 **Mantido por:** Equipe de Desenvolvimento  
-**Última atualização:** 2024
+**Última atualização:** 2025
 
