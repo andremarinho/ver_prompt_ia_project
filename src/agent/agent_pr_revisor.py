@@ -8,8 +8,6 @@ import yaml
 
 load_dotenv()
 
-# Configuração SSL
-os.environ["GRPC_DEFAULT_SSL_ROOTS_FILE_PATH"] = "/home/andre.marinho/certs/nscacert.pem"
 ssl._create_default_https_context = ssl._create_unverified_context
 
 # Inicializar LLM
@@ -38,7 +36,7 @@ def load_prompt_from_yaml(version: str = None) -> PromptTemplate:
     
     # Caminho para o arquivo de prompt
     project_root = Path(__file__).parent.parent.parent
-    prompt_file = project_root / "prompts" / version / "prompt.yaml"
+    prompt_file = project_root / "prompts/agent-code-reviewer" / version / "prompt.yaml"
     
     # Verificar se o arquivo existe
     if not prompt_file.exists():
