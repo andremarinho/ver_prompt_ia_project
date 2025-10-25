@@ -144,8 +144,9 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
       
-      - name: 📦 Instalar PyYAML
-        run: pip install pyyaml
+      - name: 📦 Instalar dependências
+        run: |
+          pip install pyyaml pytest
       
       - name: ✅ Validar YAML dos prompts
         run: |
@@ -220,6 +221,12 @@ jobs:
           else:
               print('\n✅ Todos os prompts são válidos')
           "
+      
+      - name: 🧪 Executar testes dos prompts
+        run: |
+          echo "🧪 Executando testes dos prompts..."
+          pytest tests/test_prompts.py -v --tb=short
+        continue-on-error: false
 
   check-dependencies:
     name: 📦 Verificar Dependências

@@ -92,6 +92,8 @@ O CI é executado automaticamente quando:
 - Valida sintaxe YAML
 - Verifica campos obrigatórios
 - Valida versionamento
+- Verifica registry.yaml
+- **Executa testes dos prompts**
 
 #### 5. 📦 Verificar Dependências
 - Tenta instalar dependências
