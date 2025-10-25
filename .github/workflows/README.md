@@ -33,6 +33,8 @@ Workflow de CI executado automaticamente em Pull Requests para a branch `develop
    - Valida sintaxe YAML dos prompts
    - Verifica campos obrigatórios
    - Valida estrutura dos prompts versionados
+   - Verifica registry.yaml
+   - **Executa testes automatizados dos prompts** (`pytest tests/test_prompts.py`)
 
 5. **📦 Verificar Dependências**
    - Tenta instalar todas as dependências
