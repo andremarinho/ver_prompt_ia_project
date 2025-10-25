@@ -78,7 +78,7 @@ template: |
 import yaml
 
 # Carregar prompt específico
-with open('prompts/v1.0.0/prompt.yaml', 'r') as f:
+with open('prompts/agent-code-reviewer/v1.0.0/prompt.yaml', 'r') as f:
     prompt_config = yaml.safe_load(f)
 
 # Acessar template
@@ -102,7 +102,7 @@ from langchain.prompts import PromptTemplate
 import yaml
 
 # Carregar configuração
-with open('prompts/v1.0.0/prompt.yaml', 'r') as f:
+with open('prompts/agent-code-reviewer/v1.0.0/prompt.yaml', 'r') as f:
     config = yaml.safe_load(f)
 
 # Criar PromptTemplate
@@ -150,12 +150,12 @@ Seguimos o padrão **Semantic Versioning** (MAJOR.MINOR.PATCH):
 
 1. **Criar diretório da versão:**
 ```bash
-mkdir prompts/v1.1.0
+mkdir prompts/agent-code-reviewer/v1.1.0
 ```
 
 2. **Copiar versão anterior:**
 ```bash
-cp prompts/v1.0.0/prompt.yaml prompts/v1.1.0/prompt.yaml
+cp prompts/agent-code-reviewer/v1.0.0/prompt.yaml prompts/agent-code-reviewer/v1.1.0/prompt.yaml
 ```
 
 3. **Editar o arquivo:**
@@ -173,9 +173,20 @@ template: |
 
 4. **Atualizar este README** com informações da nova versão
 
-5. **Commit com mensagem clara:**
+5. **Atualizar registry.yaml:**
+```yaml
+agents:
+  agent-code-reviewer:
+    description: "Agente especializado em revisão rigorosa de código"
+    current_version: "1.1.0"
+    path: "agent-code-reviewer/v1.1.0/prompt.yaml"
+    model: gemini-pro
+```
+
+6. **Commit com mensagem clara:**
 ```bash
-git add prompts/v1.1.0/
+git add prompts/agent-code-reviewer/v1.1.0/
+git add prompts/registry.yaml
 git commit -m "feat(prompts): adiciona v1.1.0 com análise de testes"
 ```
 

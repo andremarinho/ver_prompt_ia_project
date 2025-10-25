@@ -86,7 +86,8 @@ jobs:
             "src/main.py"
             "src/api/server.py"
             "src/agent/agent_pr_revisor.py"
-            "prompts/v1.0.0/prompt.yaml"
+            "prompts/registry.yaml"
+            "prompts/agent-code-reviewer/v1.0.0/prompt.yaml"
           )
           
           missing=0
@@ -115,7 +116,8 @@ jobs:
             "src/api"
             "src/agent"
             "prompts"
-            "prompts/v1.0.0"
+            "prompts/agent-code-reviewer"
+            "prompts/agent-code-reviewer/v1.0.0"
           )
           
           for dir in "${dirs[@]}"; do
@@ -154,6 +156,35 @@ jobs:
           
           print('🔍 Validando arquivos de prompt...')
           
+          # Validar registry.yaml
+          print('\n📋 Validando registry.yaml...')
+          try:
+              with open('prompts/registry.yaml', 'r') as f:
+                  registry = yaml.safe_load(f)
+              
+              if 'agents' not in registry:
+                  print('❌ registry.yaml: Campo \"agents\" não encontrado')
+                  sys.exit(1)
+              
+              print(f'✅ registry.yaml: Válido ({len(registry[\"agents\"])} agente(s) registrado(s))')
+              
+              # Validar se os caminhos no registry existem
+              for agent_name, agent_info in registry['agents'].items():
+                  agent_path = Path('prompts') / agent_info.get('path', '')
+                  if not agent_path.exists():
+                      print(f'❌ registry.yaml: Caminho do agente \"{agent_name}\" não existe: {agent_path}')
+                      sys.exit(1)
+                  print(f'✅ Agente \"{agent_name}\": caminho válido')
+          
+          except yaml.YAMLError as e:
+              print(f'❌ registry.yaml: Erro de sintaxe YAML: {e}')
+              sys.exit(1)
+          except Exception as e:
+              print(f'❌ registry.yaml: Erro: {e}')
+              sys.exit(1)
+          
+          # Validar prompts individuais
+          print('\n📝 Validando prompts individuais...')
           prompt_files = list(Path('prompts').rglob('prompt.yaml'))
           
           if not prompt_files:
@@ -184,10 +215,10 @@ jobs:
                   errors += 1
           
           if errors > 0:
-              print(f'❌ {errors} erro(s) encontrado(s)')
+              print(f'\n❌ {errors} erro(s) encontrado(s) nos prompts')
               sys.exit(1)
           else:
-              print('✅ Todos os prompts são válidos')
+              print('\n✅ Todos os prompts são válidos')
           "
 
   check-dependencies:

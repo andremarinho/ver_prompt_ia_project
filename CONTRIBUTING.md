@@ -230,7 +230,7 @@ extend-ignore = E203, W503, E501
 Valide o YAML localmente:
 
 ```bash
-python -c "import yaml; yaml.safe_load(open('prompts/v1.0.0/prompt.yaml'))"
+python -c "import yaml; yaml.safe_load(open('prompts/agent-code-reviewer/v1.0.0/prompt.yaml'))"
 ```
 
 ### Erro: "Dependencies installation failed"
