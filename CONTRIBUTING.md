@@ -92,6 +92,8 @@ O CI é executado automaticamente quando:
 - Valida sintaxe YAML
 - Verifica campos obrigatórios
 - Valida versionamento
+- Verifica registry.yaml
+- **Executa testes dos prompts**
 
 #### 5. 📦 Verificar Dependências
 - Tenta instalar dependências
@@ -230,7 +232,7 @@ extend-ignore = E203, W503, E501
 Valide o YAML localmente:
 
 ```bash
-python -c "import yaml; yaml.safe_load(open('prompts/v1.0.0/prompt.yaml'))"
+python -c "import yaml; yaml.safe_load(open('prompts/agent-code-reviewer/v1.0.0/prompt.yaml'))"
 ```
 
 ### Erro: "Dependencies installation failed"
